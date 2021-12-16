@@ -1,0 +1,137 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,*:before,*:after {
+    box-sizing: border-box;
+}
+
+input,
+textarea,
+select,
+button{
+    outline: none;
+}
+
+input{
+    line-height: normal;
+}
+
+label,
+button{
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+}
+
+.music {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 50px 100px 75px;
+}
+
+.music-thumb {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+}
+
+.music-thumb img {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.music-name, .music-name-author {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.music-name {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.music-name-author {
+    font-size: 16px;
+    font-weight: 500;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.timer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 40px;
+}
+
+.play {
+    width: 50px;
+    height: 50px;
+    border-radius: 100rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    font-size: 20px;
+}
+
+.shuffle, .play-forward, .play-back, .repeat {
+    cursor: pointer;
+}
+
+.range {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+    margin-bottom: 20px;
+}
+
+.range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background-color: #eeee;
+}
+
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #20e3b2;
+    width: 10px;
+    height: 10px;
+    border-radius: 100rem;
+    margin-top: -3px;
+    box-shadow: 0 0 0 3px white, 0 0 0 6px rgba(100, 100, 111, 0.05);
+}
