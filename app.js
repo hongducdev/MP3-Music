@@ -5,12 +5,59 @@ const backBtn = document.querySelector('.play-back');
 const durationTime = document.querySelector('.duration');
 const remaintionTime = document.querySelector('.remaintion');
 const rangeBar = document.querySelector('.range');
+const musicName = document.querySelector('.music-name');
+const musicImage = document.querySelector('.music-thumb img');
+const musicAuthor = document.querySelector('.music-name-author');
+const playRepeat = document.querySelector('.repeat')
+
 let isPlaying = true;
 let indexSong = 0;
-const musics = ["TinyLove.mp3","EmThích.mp3","GreenLove.mp3", "ĐếVương.mp3"]
+let isRepeat = false;
+// const musics = ["TinyLove.mp3","EmThích.mp3","GreenLove.mp3", "ĐếVương.mp3"]
+
+const musics = [
+    {
+        id: "1",
+        title: "Tiny Love",
+        author: "Thinh Suy",
+        file: "TinyLove.mp3",
+        image: "https://mp3lofi.com/wp-content/uploads/2021/12/Tiny-Love-Thinh-Suy.jpg"
+    },
+    {
+        id: "2",
+        title: "Em Thích",
+        author: "Sean ft. Lửa",
+        file: "EmThích.mp3",
+        image: "https://mp3lofi.com/wp-content/uploads/2021/12/Tiny-Love-Thinh-Suy.jpg"
+    },
+    {
+        id: "3",
+        title: "Green Love",
+        author: "TCASHMEL ft. QNT",
+        file: "GreenLove.mp3",
+        image: "https://mp3lofi.com/wp-content/uploads/2021/12/Tiny-Love-Thinh-Suy.jpg"
+    },
+    {
+        id: "4",
+        title: "Đế Vương",
+        author: "Hoàng Dũng - Dunghoangpham Cover",
+        file: "ĐếVương.mp3",
+        image: "https://mp3lofi.com/wp-content/uploads/2021/12/Tiny-Love-Thinh-Suy.jpg"
+    },
+]
 displayTimer();
 let timer;
-song.setAttribute("src", `./music/${musics[indexSong]}`);
+song.setAttribute("src", `./music/${musics[indexSong].file}`);
+
+playRepeat.addEventListener('click', function() {
+    if (isRepeat) {
+        isRepeat = false;
+        playRepeat.removeAttribute('style');
+    } else {
+        isRepeat = true;
+        playRepeat.style.color = '#20e3b2';
+    }
+});
 
 nextBtn.addEventListener('click', function() {
     changeSong(1);
@@ -19,6 +66,16 @@ nextBtn.addEventListener('click', function() {
 backBtn.addEventListener('click', function() {
     changeSong(-1);
 })
+
+song.addEventListener("ended", handleEndSong);
+function handleEndSong () {
+    if (isRepeat) {
+        isPlaying = true;
+        playPause();
+    } else {
+        changeSong(1);
+    }
+}
 function changeSong (dir) {
     if (dir === 1) {
         //nextSong
@@ -36,7 +93,8 @@ function changeSong (dir) {
         }
         isPlaying = true;
     }
-    song.setAttribute("src", `./music/${musics[indexSong]}`);
+    init(indexSong);
+    // song.setAttribute("src", `./music/${musics[indexSong].file}`);
     playPause();
 
 }
@@ -82,38 +140,14 @@ function handleChangerBar() {
     song.currentTime = rangeBar.value;
 }
 
-
-
-
-
-
-
-
-
-
-
-// songs = [
-//     {
-//         song: './music/ĐếVương.mp3',
-//         name: 'Đế Vương',
-//         name_author: 'Đình Dũng - Dunghoangpham Cover'
-//     },
-//     {
-//         song: './music/EmThích.mp3',
-//         name: 'Em Thích',
-//         name_author: 'Sean ft. Lửa'
-//     },
-//     {
-//         song: './music/Green Love.mp3',
-//         name: 'Green Love',
-//         name_author: 'CASHMEL ft. QNT'
-//     },
-//     {
-//         song: '../music/Tiny Love.mp3',
-//         name: 'Tiny Love',
-//         name_author: 'Thinh Suy'
-//     }
-// ];
+function init(indexSong) {
+    displayTimer();
+    song.setAttribute("src", `./music/${musics[indexSong].file}`);
+    musicImage.setAttribute("src", musics[indexSong].image);
+    musicName.textContent = musics[indexSong].title;
+    musicAuthor.textContent = musics[indexSong].author;
+}
+init(indexSong);
 
 
 
