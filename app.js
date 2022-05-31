@@ -9,10 +9,12 @@ const musicName = document.querySelector('.music-name');
 const musicImage = document.querySelector('.music-thumb img');
 const musicAuthor = document.querySelector('.music-name-author');
 const playRepeat = document.querySelector('.repeat')
+const shuffleBtn = document.querySelector('.shuffle');
 
 let isPlaying = true;
 let indexSong = 0;
 let isRepeat = false;
+let isShuffle = false;
 // const musics = ["TinyLove.mp3","EmThích.mp3","GreenLove.mp3", "ĐếVương.mp3"]
 
 const musics = [
@@ -40,8 +42,15 @@ const musics = [
     {
         id: "4",
         title: "Đế Vương",
-        author: "Hoàng Dũng - Dunghoangpham Cover",
+        author: "Dunghoangpham Cover",
         file: "ĐếVương.mp3",
+        image: "https://mp3lofi.com/wp-content/uploads/2021/12/Tiny-Love-Thinh-Suy.jpg"
+    },
+    {
+        id: "5",
+        title: "Độ Tộc 2",
+        author: "Do Mixi, Phao, Phuc Du, Masew",
+        file: "dotoc2.mp3",
         image: "https://mp3lofi.com/wp-content/uploads/2021/12/Tiny-Love-Thinh-Suy.jpg"
     },
 ]
@@ -58,6 +67,16 @@ playRepeat.addEventListener('click', function() {
         playRepeat.style.color = '#20e3b2';
     }
 });
+
+shuffleBtn.addEventListener('click', function() {
+    if (isShuffle) {
+        isShuffle = false;
+        shuffleBtn.removeAttribute('style');
+    } else {
+        isShuffle = true;
+        shuffleBtn.style.color = '#20e3b2';
+    }
+})
 
 nextBtn.addEventListener('click', function() {
     changeSong(1);
@@ -76,28 +95,22 @@ function handleEndSong () {
         changeSong(1);
     }
 }
-function changeSong (dir) {
-    if (dir === 1) {
-        //nextSong
-        indexSong++;
-        if (indexSong >= musics.length) {
-            indexSong = 0;
-        }
 
-        isPlaying = true;
-    } else if (dir === -1) {
-        //backSong
-        indexSong--;
-        if (indexSong < 0) {
-            indexSong = musics.length - 1;
-        }
-        isPlaying = true;
+function changeSong(n) {
+    if (isShuffle) {
+        indexSong = Math.floor(Math.random() * musics.length);
+    } else {
+        indexSong += n;
+    }
+    if (indexSong < 0) {
+        indexSong = musics.length - 1;
+    } else if (indexSong > musics.length - 1) {
+        indexSong = 0;
     }
     init(indexSong);
-    // song.setAttribute("src", `./music/${musics[indexSong].file}`);
     playPause();
-
 }
+
 playBtn.addEventListener('click', playPause);
 function playPause() {
     if (isPlaying) {
